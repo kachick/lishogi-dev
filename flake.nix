@@ -35,6 +35,8 @@
               #
               # Do not include mongodb with nixpkgs
               # It is unfree license and cachix does not have binary cache. Building in local is much slow
+              # Run mongod container. singularity is a replacement of docker
+              singularity
               redis
 
               # For run Shogi AI
