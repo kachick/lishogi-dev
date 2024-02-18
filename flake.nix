@@ -13,13 +13,7 @@
   outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        stable-pkgs = import nixpkgs-stable {
-          system = system;
-          # Why: MongoDB is using SSPL even if old major as 4.4. They apply SSPL since all patches since 2018
-          #      See https://github.com/mongodb/mongo/blob/89d6ffe6fc67b36fd47aff6425087003966588e3/README#L80-L86
-          # How: https://discourse.nixos.org/t/allow-unfree-in-flakes/29904/2
-          config.allowUnfree = true;
-        };
+        stable-pkgs = nixpkgs-stable.legacyPackages.${system};
         unstable-pkgs = nixpkgs-unstable.legacyPackages.${system};
       in
       {
@@ -38,7 +32,9 @@
               unstable-pkgs.go-task
 
               # For run lishogi server
-              mongodb
+              #
+              # Do not include mongodb with nixpkgs
+              # It is unfree license and cachix does not have binary cache. Building in local is much slow
               redis
 
               # For run Shogi AI
@@ -52,7 +48,7 @@
               yarn
             ];
 
-            shellHook = "run_db.sh";
+            # shellHook = "run_db.bash";
           };
       }
     );
