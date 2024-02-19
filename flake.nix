@@ -10,7 +10,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
+  outputs = { self, lib, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         stable-pkgs = nixpkgs-stable.legacyPackages.${system};
@@ -57,29 +57,39 @@
               echo '2. In terminal A: `nix run kachick:nix-flake-lishogi#database`'
               echo '3. In terminal B: `cd nix-flake-lishogi && direnv allow`'
               echo '4. After this, you can run commands in terminal B that written in lilla setup documents'
+              echo 'ui/build'
+              echo './lila'
             '';
           };
 
-        packages.database = stable-pkgs.stdenv.mkDerivation
-          {
-            name = "database";
-            src = self;
-            # https://discourse.nixos.org/t/adding-runtime-dependency-to-flake/27785
-            buildInputs = with stable-pkgs; [
-              makeWrapper
-            ];
-            installPhase = ''
-              mkdir -p $out/bin
-              cp -rf ./lib $out
-              install -t $out/bin run_db.bash
-              makeWrapper run_db.bash $out/bin/console \
-                --prefix PATH : ${stable-pkgs.lib.makeBinPath [ stable-pkgs.singularity ]}
-            '';
-            runtimeDependencies = [
-              stable-pkgs.singularity
-            ];
-          };
+        # packages.database = stable-pkgs.stdenv.mkDerivation
+        #   {
+        #     name = "database";
+        #     src = self;
+        #     # https://discourse.nixos.org/t/adding-runtime-dependency-to-flake/27785
+        #     buildInputs = with stable-pkgs; [
+        #       makeWrapper
+        #     ];
+        #     installPhase = ''
+        #       mkdir -p $out/bin
+        #       cp ./run_db.bash $out
+        #       install -t $out/bin run_db.bash
+        #       makeWrapper run_db.bash $out/bin/database \
+        #         --prefix PATH : ${stable-pkgs.lib.makeBinPath [ stable-pkgs.singularity ]}
+        #     '';
+        #     runtimeDependencies = [
+        #       stable-pkgs.singularity
+        #     ];
+        #   };
 
+        packages.database = stable-pkgs.writeShellScriptBin "run_db" ''
+          set -euxo pipefail
+
+          databaseDir="$1"
+
+          echo "''${databaseDir="$(${lib.getBin stable-pkgs.coreutils}/bin/mktemp -d --suffix=.lishogi.mongo.database)"}"
+          ${lib.getExe stable-pkgs.singularity} run --bind "''${databaseDir}:/data/db" docker://mongo:5.0.24-focal
+        '';
       }
     );
 }
