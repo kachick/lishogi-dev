@@ -34,4 +34,4 @@ Mongo and Redis will run in a container, but it will not use docker and docker-c
 
 ## Limitations
 
-singularity provided by nixpkgs don't run on M1 mac
+singularity provided by nixpkgs don't run on macOS
