@@ -31,3 +31,7 @@ So started this project, I want to prefer nix as much as possible instead of doc
 
 In this repo, set up the dependencies with nix and flake, except for data stores like MongoDB and Redis.\
 Mongo and Redis will run in a container, but it will not use docker and docker-compose, it will only use [sylabs/singularity](https://github.com/sylabs/singularity) for that.
+
+## Limitations
+
+singularity provided by nixpkgs don't run on M1 mac
