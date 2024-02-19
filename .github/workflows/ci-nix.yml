@@ -1,13 +1,12 @@
 name: CI - Nix
 on:
-  # TODO: Remove this since public
-  # push:
-  #   branches: [main]
-  #   paths:
-  #     - '.github/workflows/ci-nix.yml'
-  #     - '*.nix'
-  #     - 'flake.*'
-  #     - 'Taskfile.yml'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ci-nix.yml'
+      - '*.nix'
+      - 'flake.*'
+      - 'Taskfile.yml'
   pull_request:
     paths:
       - '.github/workflows/ci-nix.yml'

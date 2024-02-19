@@ -11,10 +11,10 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 1. In terminal B: `nix run kachick:lishogi-devenv#redis`
 1. In terminal C:
    ```bash
-   git clone https://github.com/WandererXII/lishogi.git
+   git clone git@github.com:WandererXII/lishogi.git
    cd lishogi
    # Try this version of lishogi if you have any problems running head.
-   # `git checkout 8ccc283ae2841eb1601189ff272bfcf3fa951c2a`
+   # `git checkout a664c1909115b3f5fd427f510d1634335d0b2c1d`
    nix develop kachick:lishogi-devenv
    ```
 1. After this, you can run commands in terminal C that written as in [lila setup documents](https://github.com/lichess-org/lila/wiki/Lichess-Development-Onboarding)
@@ -29,5 +29,5 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 I want similar solution like [lichess-org/lila-docker](https://github.com/lichess-org/lila-docker) in lishogi, but I couldn't find anything.\
 So started this project, I want to prefer nix as much as possible instead of docker way.
 
-In this repo, set up the dependencies with nix and flake, except for data stores like MongoDB and Redis.
+In this repo, set up the dependencies with nix and flake, except for data stores like MongoDB and Redis.\
 Mongo and Redis will run in a container, but it will not use docker and docker-compose, it will only use [sylabs/singularity](https://github.com/sylabs/singularity) for that.
