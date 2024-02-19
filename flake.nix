@@ -51,29 +51,9 @@
             ];
 
             shellHook = ''
-              echo 'Welcome this console to run or develop lishogi!'
+              echo 'Happy coding! or shogi!'
             '';
           };
-
-        # packages.database = stable-pkgs.stdenv.mkDerivation
-        #   {
-        #     name = "database";
-        #     src = self;
-        #     # https://discourse.nixos.org/t/adding-runtime-dependency-to-flake/27785
-        #     buildInputs = with stable-pkgs; [
-        #       makeWrapper
-        #     ];
-        #     installPhase = ''
-        #       mkdir -p $out/bin
-        #       cp ./run_db.bash $out
-        #       install -t $out/bin run_db.bash
-        #       makeWrapper run_db.bash $out/bin/database \
-        #         --prefix PATH : ${stable-pkgs.lib.makeBinPath [ stable-pkgs.singularity ]}
-        #     '';
-        #     runtimeDependencies = [
-        #       stable-pkgs.singularity
-        #     ];
-        #   };
 
         packages.redis = stable-pkgs.writeShellScriptBin "run_redis" ''
           set -euxo pipefail

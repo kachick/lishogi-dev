@@ -14,7 +14,7 @@ tasks:
       - task: lint
   test:
     cmds:
-      - echo 'Update here'
+      - nix flake check
   fmt:
     cmds:
       - dprint fmt

@@ -12,6 +12,6 @@
 ```console
 > nix develop
 (prepared bash)
-> dprint --version
+> task
 ...
 ```
