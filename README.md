@@ -19,7 +19,7 @@ Open your terminal with many tabs or windows as follows!
    ```bash
    git clone git@github.com:WandererXII/lishogi.git
    cd lishogi
-   # Try this version of lishogi if you have any problems running head.
+   # Try this version if you have any problems running head.
    # `git checkout a664c1909115b3f5fd427f510d1634335d0b2c1d`
    nix develop github:kachick/lishogi-devenv
    ```
@@ -36,7 +36,7 @@ Open your terminal with many tabs or windows as follows!
    ```bash
    git clone git@github.com:WandererXII/lila-ws.git
    cd lila-ws
-   # Try this version of lishogi if you have any problems running head.
+   # Try this version if you have any problems running head.
    # `git checkout 60e3a2b02e11c4bb1ce4bfe2d3cb844486a884c5`
    nix develop github:kachick/lishogi-devenv
    ```
@@ -49,7 +49,7 @@ Open your terminal with many tabs or windows as follows!
    ```bash
    git clone https://github.com/WandererXII/shoginet.git
    cd shoginet
-   # Try this version of shoginet if you have any problems running head.
+   # Try this version if you have any problems running head.
    # `git checkout 9d2d5244b5de9e1076deb04d598c4efc13ac6d21`
    nix develop github:kachick/lishogi-devenv
    ```
