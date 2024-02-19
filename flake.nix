@@ -50,8 +50,36 @@
               yarn
             ];
 
-            # shellHook = "run_db.bash";
+            shellHook = ''
+              echo 'Welcome this console to run or develop lishogi!'
+              echo 'How to use'
+              echo '1. Open your 2 terminal windows'
+              echo '2. In terminal A: `nix run kachick:nix-flake-lishogi#database`'
+              echo '3. In terminal B: `cd nix-flake-lishogi && direnv allow`'
+              echo '4. After this, you can run commands in terminal B that written in lilla setup documents'
+            '';
           };
+
+        packages.database = stable-pkgs.stdenv.mkDerivation
+          {
+            name = "database";
+            src = self;
+            # https://discourse.nixos.org/t/adding-runtime-dependency-to-flake/27785
+            buildInputs = with stable-pkgs; [
+              makeWrapper
+            ];
+            installPhase = ''
+              mkdir -p $out/bin
+              cp -rf ./lib $out
+              install -t $out/bin run_db.bash
+              makeWrapper run_db.bash $out/bin/console \
+                --prefix PATH : ${stable-pkgs.lib.makeBinPath [ stable-pkgs.singularity ]}
+            '';
+            runtimeDependencies = [
+              stable-pkgs.singularity
+            ];
+          };
+
       }
     );
 }
