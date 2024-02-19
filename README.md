@@ -29,6 +29,5 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 I want similar solution like [lichess-org/lila-docker](https://github.com/lichess-org/lila-docker) in lishogi, but I couldn't find anything.\
 So started this project, I want to prefer nix as much as possible instead of docker way.
 
-In this repo, set up the dependencies with nix and flake except MongoDB.\
-MongoDB uses SSPL, the license is not free. So cachix does not have the binary cache. Always build from source took a lot of time.\
-Reluctantly, Mongo will run in a container, but it will not use docker and docker-compose, it will only use [sylabs/singularity](https://github.com/sylabs/singularity) for that.
+In this repo, set up the dependencies with nix and flake, except for data stores like MongoDB and Redis.
+Mongo and Redis will run in a container, but it will not use docker and docker-compose, it will only use [sylabs/singularity](https://github.com/sylabs/singularity) for that.

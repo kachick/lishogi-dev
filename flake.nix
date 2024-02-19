@@ -37,7 +37,6 @@
               # It is unfree license and cachix does not have binary cache. Building in local is much slow
               # Run mongod container. singularity is a replacement of docker
               singularity
-              redis
 
               # For run Shogi AI
               python3
@@ -51,14 +50,14 @@
             ];
 
             shellHook = ''
-              echo 'Happy coding! or shogi!'
+              echo 'Happy coding! Happy shogi!'
             '';
           };
 
         packages.redis = stable-pkgs.writeShellScriptBin "run_redis" ''
           set -euxo pipefail
 
-          ${stable-pkgs.lib.getBin stable-pkgs.redis}/bin/redis-server
+          ${stable-pkgs.lib.getExe stable-pkgs.singularity} run docker://redis:7.2.4-alpine3.19
         '';
 
         packages.mongo = stable-pkgs.writeShellScriptBin "run_mongo" ''
