@@ -10,7 +10,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, lib, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
+  outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         stable-pkgs = nixpkgs-stable.legacyPackages.${system};
@@ -52,13 +52,6 @@
 
             shellHook = ''
               echo 'Welcome this console to run or develop lishogi!'
-              echo 'How to use'
-              echo '1. Open your 2 terminal windows'
-              echo '2. In terminal A: `nix run kachick:nix-flake-lishogi#database`'
-              echo '3. In terminal B: `cd nix-flake-lishogi && direnv allow`'
-              echo '4. After this, you can run commands in terminal B that written in lilla setup documents'
-              echo 'ui/build'
-              echo './lila'
             '';
           };
 
@@ -82,13 +75,18 @@
         #     ];
         #   };
 
-        packages.database = stable-pkgs.writeShellScriptBin "run_db" ''
+        packages.redis = stable-pkgs.writeShellScriptBin "run_redis" ''
           set -euxo pipefail
 
-          databaseDir="$1"
+          ${stable-pkgs.lib.getBin stable-pkgs.redis}/bin/redis-server
+        '';
 
-          echo "''${databaseDir="$(${lib.getBin stable-pkgs.coreutils}/bin/mktemp -d --suffix=.lishogi.mongo.database)"}"
-          ${lib.getExe stable-pkgs.singularity} run --bind "''${databaseDir}:/data/db" docker://mongo:5.0.24-focal
+        packages.mongo = stable-pkgs.writeShellScriptBin "run_mongo" ''
+          set -euxo pipefail
+
+          # https://doi-t.hatenablog.com/entry/2013/12/08/161929
+          databaseDir=''${1:-"$(${stable-pkgs.lib.getBin stable-pkgs.coreutils}/bin/mktemp -d --suffix=.lishogi.mongo.database)"}
+          ${stable-pkgs.lib.getExe stable-pkgs.singularity} run --bind "''${databaseDir}:/data/db" docker://mongo:5.0.24-focal
         '';
       }
     );
