@@ -6,16 +6,20 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 
 ## Usage
 
-Open your terminal with many tabs or windows as follows!
+1. Install [Nix](https://nixos.org/) package manager and [Docker](https://www.docker.com/) with yourself
+1. Open 3 terminals and do following sections
 
-### Data Store
+### Terminal A - Data Store, etc - Docker
 
-1. In terminal A: `nix run kachick:lishogi-devenv#mongo`
-1. In terminal B: `nix run kachick:lishogi-devenv#redis`
+```bash
+git clone git@github.com:kachick/lishogi-devenv.git
+cd lishogi-devenv
+docker compose up
+```
 
-### lila
+### Terminal B - lila and UI - Nix
 
-1. In terminal C:
+1. Login to dev shell with current directory as cloned repository
    ```bash
    git clone git@github.com:WandererXII/lishogi.git
    cd lishogi
@@ -30,22 +34,9 @@ Open your terminal with many tabs or windows as follows!
    1. [lila] $ `run`
 1. Open [localhost:9663](http://localhost:9663/)
 
-### WebSocket
+### Terminal C - Shogi AI - Nix
 
-1. In terminal D:
-   ```bash
-   git clone git@github.com:WandererXII/lila-ws.git
-   cd lila-ws
-   # Try this version if you have any problems running head.
-   # `git checkout 60e3a2b02e11c4bb1ce4bfe2d3cb844486a884c5`
-   nix develop github:kachick/lishogi-devenv
-   ```
-1. `sbt` # Entered in sbt console
-1. [sbt:lila-ws>] $ `~reStart`
-
-### Shogi AI
-
-1. In terminal E:
+1. Login to dev shell with current directory as cloned repository
    ```bash
    git clone https://github.com/WandererXII/shoginet.git
    cd shoginet
@@ -53,8 +44,7 @@ Open your terminal with many tabs or windows as follows!
    # `git checkout 9d2d5244b5de9e1076deb04d598c4efc13ac6d21`
    nix develop github:kachick/lishogi-devenv
    ```
-1. (Optional) If you want to compile the engines by yourself, use this devenv as follows.\
-   So you can run commands that written as in [shoginet documents](https://github.com/WandererXII/shoginet/blob/main/README.md?plain=1#L7-L27)
+1. (Optional) Compile engines yourself the way it is written in [shoginet](https://github.com/WandererXII/shoginet/blob/main/README.md?plain=1#L7-L27)
    ```bash
    ./build-yaneuraou.sh
    ./build-fairy.sh
@@ -77,8 +67,4 @@ I want similar solution like [lichess-org/lila-docker](https://github.com/liches
 So started this project, I want to prefer nix as much as possible instead of docker way.
 
 In this repo, set up the dependencies with nix and flake, except for data stores like MongoDB and Redis.\
-Mongo and Redis will run in a container, but it will not use docker and docker-compose, it will only use [sylabs/singularity](https://github.com/sylabs/singularity) for that.
-
-## Limitations
-
-singularity provided by nixpkgs don't run on macOS
+Back-end like MongoDB and Redis, Websocket will run in containers.

@@ -1,0 +1,24 @@
+services:
+  mongodb:
+    image: mongo:5.0.24-focal
+    restart: unless-stopped
+    networks:
+      - lila-network
+
+  redis:
+    image: redis:7.2.4-alpine3.19
+    restart: unless-stopped
+    networks:
+      - lila-network
+
+  lila_ws:
+    build:
+      context: docker
+      dockerfile: lila-ws.Dockerfile
+    restart: unless-stopped
+    networks:
+      - lila-network
+
+networks:
+  lila-network:
+    driver: bridge

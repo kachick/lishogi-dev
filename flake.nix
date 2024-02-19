@@ -24,26 +24,23 @@
               # https://github.com/kachick/dotfiles/pull/228
               bashInteractive
 
-              # For development this repo
+              # Maintain this repo
               unstable-pkgs.nil
               unstable-pkgs.nixpkgs-fmt
               unstable-pkgs.dprint
               unstable-pkgs.typos
               unstable-pkgs.go-task
 
-              # For run lishogi server
-              #
               # Do not include mongodb with nixpkgs
               # It is unfree license and cachix does not have binary cache. Building in local is much slow
               # Run mongod container. singularity is a replacement of docker
-              singularity
 
-              # For run Shogi AI
+              # Compile Shogi AI
               python3
               python311Packages.requests
               gcc
 
-              # For develop lishogi
+              # Develop lila
               sbt
               nodejs-18_x
               yarn
@@ -53,20 +50,6 @@
               echo 'Happy coding! Happy shogi!'
             '';
           };
-
-        packages.redis = stable-pkgs.writeShellScriptBin "run_redis" ''
-          set -euxo pipefail
-
-          ${stable-pkgs.lib.getExe stable-pkgs.singularity} run docker://redis:7.2.4-alpine3.19
-        '';
-
-        packages.mongo = stable-pkgs.writeShellScriptBin "run_mongo" ''
-          set -euxo pipefail
-
-          # https://doi-t.hatenablog.com/entry/2013/12/08/161929
-          databaseDir=''${1:-"$(${stable-pkgs.lib.getBin stable-pkgs.coreutils}/bin/mktemp -d --suffix=.lishogi.mongo.database)"}
-          ${stable-pkgs.lib.getExe stable-pkgs.singularity} run --bind "''${databaseDir}:/data/db" docker://mongo:5.0.24-focal
-        '';
       }
     );
 }
