@@ -50,8 +50,24 @@
               yarn
             ];
 
-            # shellHook = "run_db.bash";
+            shellHook = ''
+              echo 'Happy coding! or shogi!'
+            '';
           };
+
+        packages.redis = stable-pkgs.writeShellScriptBin "run_redis" ''
+          set -euxo pipefail
+
+          ${stable-pkgs.lib.getBin stable-pkgs.redis}/bin/redis-server
+        '';
+
+        packages.mongo = stable-pkgs.writeShellScriptBin "run_mongo" ''
+          set -euxo pipefail
+
+          # https://doi-t.hatenablog.com/entry/2013/12/08/161929
+          databaseDir=''${1:-"$(${stable-pkgs.lib.getBin stable-pkgs.coreutils}/bin/mktemp -d --suffix=.lishogi.mongo.database)"}
+          ${stable-pkgs.lib.getExe stable-pkgs.singularity} run --bind "''${databaseDir}:/data/db" docker://mongo:5.0.24-focal
+        '';
       }
     );
 }
