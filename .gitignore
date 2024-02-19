@@ -1,4 +1,6 @@
 .direnv
 
+target
+
 dump.rdb
 .database
