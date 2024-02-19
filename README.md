@@ -60,7 +60,7 @@ Open your terminal with many tabs or windows as follows!
    ./build-fairy.sh
    git status # you may see updated binaries
    ```
-1. Use updated binaries or included prebuilt binaries in the repo.
+1. (Optional) Test updated binaries or included prebuilt binaries in the repo.
    1. `./YaneuraOu-by-gcc` # Entered in YaneuraOu console
    1. `usi` # returns "usiok"
    1. `isready` # returns "readyok"
