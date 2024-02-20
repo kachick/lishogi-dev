@@ -25,3 +25,10 @@ ping lila
 nc -vz lila 9663
 http lila:9663
 ```
+
+## How about to use nix for datastore?
+
+Do not include mongodb with nixpkgs.\
+It is unfree license and cachix does not have binary cache.\
+Building in local is much slow.\
+And I don't have confident for simple prebuilt backend with dropping container.
