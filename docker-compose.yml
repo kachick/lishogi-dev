@@ -23,3 +23,10 @@ services:
     volumes:
       - ./repos/lila-ws:/lila-ws
       - ./conf/lila-ws.conf:/lila-ws.conf
+
+  shoginet:
+    build:
+      dockerfile: docker/shoginet.Dockerfile
+    restart: unless-stopped
+    extra_hosts:
+      host.docker.internal: host-gateway

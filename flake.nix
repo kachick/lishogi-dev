@@ -35,11 +35,6 @@
               # It is unfree license and cachix does not have binary cache. Building in local is much slow
               # Run mongod container. singularity is a replacement of docker
 
-              # Compile Shogi AI
-              python3
-              python311Packages.requests
-              gcc
-
               # Develop lila
               sbt
               nodejs-18_x
