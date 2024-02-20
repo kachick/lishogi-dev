@@ -5,6 +5,8 @@ services:
     hostname: mongodb
     ports:
       - 27017:27017
+    volumes:
+      - ./repos/lishogi-db-scripts:/lishogi-db-scripts
 
   redis:
     image: redis:7.2.4-alpine3.19
