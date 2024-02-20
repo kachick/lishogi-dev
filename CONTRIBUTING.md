@@ -18,7 +18,7 @@ nixos container basically does not have basic unix tools, but installing them is
 
 ```bash
 docker compose up -d
-docker exec -it lishogi-devenv-shoginet-1 bash
+docker exec -it lishogi-dev-shoginet-1 bash
 cat /etc/hosts
 nix-shell --packages iputils netcat httpie
 ping lila

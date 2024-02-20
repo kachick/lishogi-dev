@@ -1,6 +1,6 @@
-# lishogi-devenv
+# lishogi-dev
 
-[![CI - Nix Status](https://github.com/kachick/lishogi-devenv/actions/workflows/ci-nix.yml/badge.svg?branch=main)](https://github.com/kachick/lishogi-devenv/actions/workflows/ci-nix.yml?query=branch%3Amain+)
+[![CI - Nix Status](https://github.com/kachick/lishogi-dev/actions/workflows/ci-nix.yml/badge.svg?branch=main)](https://github.com/kachick/lishogi-dev/actions/workflows/ci-nix.yml?query=branch%3Amain+)
 
 Set up environments to run [lishogi.org](https://lishogi.org/) and [develop](https://github.com/WandererXII/lishogi) on your local
 
@@ -12,8 +12,8 @@ Set up environments to run [lishogi.org](https://lishogi.org/) and [develop](htt
 ### Terminal A - Setup and run MongoDB, Redis, lila-ws(websocket), shoginet(AI)
 
 ```bash
-git clone git@github.com:kachick/lishogi-devenv.git
-cd lishogi-devenv
+git clone git@github.com:kachick/lishogi-dev.git
+cd lishogi-dev
 direnv allow
 task setup
 docker compose up
@@ -27,7 +27,7 @@ You can run commands that written as in [lila setup documents](https://github.co
 
 ```console
 cd ./repos/lishogi
-nix develop github:kachick/lishogi-devenv#lila
+nix develop github:kachick/lishogi-dev#lila
 ui/build
 ./lila # Entered in sbt console
 [lila] $ compile
