@@ -32,5 +32,5 @@ services:
     restart: unless-stopped
     extra_hosts:
       # https://github.com/docker/compose/issues/2915
-      # Prefer another name rather than overrifing `host.docker.internal`, it makes confusions
+      # Prefer a different name rather than overriding `host.docker.internal', it causes confusion.
       - 'lila:${DOCKER_HOST_IP}'
