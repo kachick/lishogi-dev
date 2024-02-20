@@ -19,11 +19,13 @@ tasks:
     cmds:
       - dprint fmt
       - nixpkgs-fmt ./*.nix
+      - shfmt --write ./*.bash
   lint:
     cmds:
       - dprint check
       - typos . .github .vscode
       - nixpkgs-fmt --check ./*.nix
+      - shellcheck ./*.bash
   deps:
     cmds:
       - nix --version
@@ -31,3 +33,9 @@ tasks:
       - task --version
       - dprint --version
       - typos --version
+      - shellcheck --version
+      - shfmt --version
+      - docker --version
+      - sbt --version
+      - node --version
+      - yarn --version

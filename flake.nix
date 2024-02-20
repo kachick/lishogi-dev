@@ -30,6 +30,8 @@
               unstable-pkgs.dprint
               unstable-pkgs.typos
               unstable-pkgs.go-task
+              unstable-pkgs.shellcheck
+              unstable-pkgs.shfmt
 
               # Do not include mongodb with nixpkgs
               # It is unfree license and cachix does not have binary cache. Building in local is much slow
