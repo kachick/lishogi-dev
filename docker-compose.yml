@@ -28,5 +28,5 @@ services:
     build:
       dockerfile: docker/shoginet.Dockerfile
     restart: unless-stopped
-    extra_hosts:
-      host.docker.internal: host-gateway
+    network_mode: host
+    # Do NOT manually specify extra_hosts as host.docker.internal here
