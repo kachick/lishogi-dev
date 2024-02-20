@@ -8,6 +8,7 @@
     "singleQuote": true
   },
   "excludes": [
+    "repos",
     ".database"
   ],
   "plugins": [
