@@ -1,0 +1,34 @@
+services:
+  mongodb:
+    image: mongo:5.0.24-focal
+    restart: unless-stopped
+    hostname: mongodb
+    ports:
+      - 27017:27017
+
+  redis:
+    image: redis:7.2.4-alpine3.19
+    restart: unless-stopped
+    hostname: redis
+    ports:
+      - 6379:6379
+
+  lila_ws:
+    build:
+      context: docker
+      dockerfile: lila-ws.Dockerfile
+    restart: unless-stopped
+    ports:
+      - 9664:9664
+    volumes:
+      - ./repos/lila-ws:/lila-ws
+      - ./conf/lila-ws.conf:/lila-ws.conf
+
+  shoginet:
+    build:
+      dockerfile: docker/shoginet.Dockerfile
+    restart: unless-stopped
+    extra_hosts:
+      # https://github.com/docker/compose/issues/2915
+      # Prefer another name rather than overrifing `host.docker.internal`, it makes confusions
+      - 'lila:${DOCKER_HOST_IP}'
