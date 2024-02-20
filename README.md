@@ -19,7 +19,8 @@ task setup
 docker compose up
 ```
 
-`docker compose up -d` can suppress the logs in the current terminal, but it is recommended to keep the logs in sight.
+- `docker compose up -d` can suppress the logs in the current terminal, but it is recommended to keep the logs in sight.
+- `task prepare_db` may improve performance with creating index
 
 ### Terminal B - lila and UI - Nix
 

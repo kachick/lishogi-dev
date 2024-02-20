@@ -32,6 +32,9 @@ tasks:
   pin:
     cmds:
       - ./scripts/pin_repos.bash
+  prepare_db:
+    cmds:
+      - docker compose exec mongodb bash -c 'mongosh lishogi < /lishogi-db-scripts/utils/indexes.js'
   deps:
     cmds:
       - nix --version
