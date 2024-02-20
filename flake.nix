@@ -1,7 +1,6 @@
 {
   inputs = {
     # Candidate channels
-    #   - https://github.com/kachick/anylang-template/issues/17
     #   - https://discourse.nixos.org/t/differences-between-nix-channels/13998
     # How to update the revision
     #   - `nix flake update --commit-lock-file` # https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-update.html
@@ -21,7 +20,6 @@
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
-              # https://github.com/kachick/dotfiles/pull/228
               stable-pkgs.bashInteractive
 
               # Maintain this repo
