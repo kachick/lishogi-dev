@@ -15,7 +15,7 @@ Set up environments to run [lishogi.org](https://lishogi.org/) and [develop](htt
 git clone git@github.com:kachick/lishogi-devenv.git
 cd lishogi-devenv
 direnv allow
-./setup.bash
+task setup
 docker compose up
 ```
 
@@ -41,7 +41,7 @@ Open [localhost:9663](http://localhost:9663/) in your web browser
 ## FAQ
 
 Q. Broken behavaior after upstream changes\
-A. Update this repository to follow upstream, or run [`./pin_repos.bash`](pin_repos.bash)
+A. Update this repository to follow upstream, or run `task pin`
 
 Q. How to update this repo?\
 A. Additional notes may be found in [CONTRIBUTING.md](CONTRIBUTING.md)

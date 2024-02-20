@@ -19,13 +19,19 @@ tasks:
     cmds:
       - dprint fmt
       - nixpkgs-fmt ./*.nix
-      - shfmt --write ./*.bash
+      - shfmt --write ./scripts/*.bash
   lint:
     cmds:
       - dprint check
       - typos . .github .vscode
       - nixpkgs-fmt --check ./*.nix
-      - shellcheck ./*.bash
+      - shellcheck ./scripts/*.bash
+  setup:
+    cmds:
+      - ./scripts/setup.bash
+  pin:
+    cmds:
+      - ./scripts/pin_repos.bash
   deps:
     cmds:
       - nix --version
