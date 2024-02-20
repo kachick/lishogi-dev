@@ -8,8 +8,6 @@
 1. You can use development tools
 
 ```console
-> nix develop
-(prepared bash)
 > task
 ...
 ```
