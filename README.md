@@ -25,13 +25,17 @@ docker compose up
 
 You can run commands that written as in [lila setup documents](https://github.com/lichess-org/lila/wiki/Lichess-Development-Onboarding) with [nix devshell](flake.nix)
 
-```console
-cd ./repos/lishogi
+```bash
+cd lishogi-dev/repos/lishogi
 nix develop github:kachick/lishogi-dev#lila
 ui/build
-./lila # Entered in sbt console
+./lila # Enter in sbt console
+```
+
+```console
 [lila] $ compile
 [lila] $ run
+...
 ```
 
 ### Happy Shogi!
@@ -48,10 +52,5 @@ A. Additional notes may be found in [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Motivation and concept
 
-I want similar solution like [lichess-org/lila-docker](https://github.com/lichess-org/lila-docker) in lishogi, but I couldn't find anything.\
-So started this project, I want to prefer nix as much as possible instead of docker way.
-
-In this repo
-
-- Setting up the coding dependencies with nix and flake
-- Back-end will run in containers
+When I wanted a solution similar to [lichess-org/lila-docker](https://github.com/lichess-org/lila-docker) in lishogi, I couldn't find an overall solution.\
+So I started this project. I prefer nix as possible rather than docker except for simple back-ends like databases.
