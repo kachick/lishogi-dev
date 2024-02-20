@@ -28,7 +28,6 @@ services:
     build:
       dockerfile: docker/shoginet.Dockerfile
     restart: unless-stopped
-    network_mode: host
     extra_hosts:
       # https://github.com/docker/compose/issues/2915
       # Prefer another name rather than overrifing `host.docker.internal`, it makes confusions
