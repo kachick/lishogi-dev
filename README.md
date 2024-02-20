@@ -2,7 +2,7 @@
 
 [![CI - Nix Status](https://github.com/kachick/lishogi-devenv/actions/workflows/ci-nix.yml/badge.svg?branch=main)](https://github.com/kachick/lishogi-devenv/actions/workflows/ci-nix.yml?query=branch%3Amain+)
 
-Setup environments to run and/or develop [WandererXII/lishogi](https://github.com/WandererXII/lishogi) on your local
+Set up environments to run [lishogi.org](https://lishogi.org/) and [develop](https://github.com/WandererXII/lishogi) on your local
 
 ## Usage
 
@@ -26,7 +26,7 @@ docker compose up
 You can run commands that written as in [lila setup documents](https://github.com/lichess-org/lila/wiki/Lichess-Development-Onboarding) with [nix devshell](flake.nix)
 
 ```console
-cd ./repos
+cd ./repos/lishogi
 nix develop github:kachick/lishogi-devenv
 ui/build
 ./lila # Entered in sbt console
