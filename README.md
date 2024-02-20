@@ -6,7 +6,7 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 
 ## Usage
 
-1. Install [Nix](https://nixos.org/) package manager and [Docker](https://www.docker.com/) with yourself
+1. Install [Nix](https://github.com/DeterminateSystems/nix-installer), [Docker](https://www.docker.com/) and [direnv](https://github.com/direnv/direnv)
 1. Open 2 terminals and do following sections
 
 ### Terminal A - Setup and run MongoDB, Redis, lila-ws(websocket), shoginet(AI)
@@ -14,6 +14,7 @@ Setup environments to run or develop [WandererXII/lishogi](https://github.com/Wa
 ```bash
 git clone git@github.com:kachick/lishogi-devenv.git
 cd lishogi-devenv
+direnv allow
 ./setup.bash
 docker compose up
 ```

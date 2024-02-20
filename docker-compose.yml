@@ -29,4 +29,7 @@ services:
       dockerfile: docker/shoginet.Dockerfile
     restart: unless-stopped
     network_mode: host
-    # Do NOT manually specify extra_hosts as host.docker.internal here
+    extra_hosts:
+      # https://github.com/docker/compose/issues/2915
+      # Prefer another name rather than overrifing `host.docker.internal`, it makes confusions
+      - 'lila:${DOCKER_HOST_IP}'
