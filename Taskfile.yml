@@ -41,8 +41,3 @@ tasks:
       - typos --version
       - shellcheck --version
       - shfmt --version
-      # GitHub Action macos runner does not have docker in the PATH
-      - '[ "$CI" == "true" ] || docker --version'
-      - sbt --version
-      - node --version
-      - yarn --version

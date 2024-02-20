@@ -27,7 +27,7 @@ You can run commands that written as in [lila setup documents](https://github.co
 
 ```console
 cd ./repos/lishogi
-nix develop github:kachick/lishogi-devenv
+nix develop github:kachick/lishogi-devenv#lila
 ui/build
 ./lila # Entered in sbt console
 [lila] $ compile

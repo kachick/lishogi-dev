@@ -17,34 +17,40 @@
         unstable-pkgs = nixpkgs-unstable.legacyPackages.${system};
       in
       {
-        devShells.default = with stable-pkgs;
+        devShells.default = with unstable-pkgs;
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
               # https://github.com/kachick/dotfiles/pull/228
-              bashInteractive
+              stable-pkgs.bashInteractive
 
               # Maintain this repo
-              unstable-pkgs.nil
-              unstable-pkgs.nixpkgs-fmt
-              unstable-pkgs.dprint
-              unstable-pkgs.typos
-              unstable-pkgs.go-task
-              unstable-pkgs.shellcheck
-              unstable-pkgs.shfmt
+              nil
+              nixpkgs-fmt
+              dprint
+              typos
+              go-task
+              shellcheck
+              shfmt
+            ];
 
-              # Do not include mongodb with nixpkgs
-              # It is unfree license and cachix does not have binary cache. Building in local is much slow
-              # Run mongod container. singularity is a replacement of docker
+            shellHook = ''
+              echo 'Happy coding! Happy shogi!'
+            '';
+          };
 
-              # Develop lila
+        packages.lila = stable-pkgs.mkShell
+          {
+            buildInputs = with stable-pkgs; [
+              bashInteractive
+
               sbt
               nodejs-18_x
               yarn
             ];
 
             shellHook = ''
-              echo 'Happy coding! Happy shogi!'
+              echo 'Dev shell for "lila"'
             '';
           };
       }
