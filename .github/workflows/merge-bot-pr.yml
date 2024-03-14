@@ -30,9 +30,6 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1.6.0
       - name: Wait other jobs
         uses: kachick/wait-other-jobs@v2
         timeout-minutes: 10
