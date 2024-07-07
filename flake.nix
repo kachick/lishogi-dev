@@ -4,23 +4,21 @@
     #   - https://discourse.nixos.org/t/differences-between-nix-channels/13998
     # How to update the revision
     #   - `nix flake update --commit-lock-file` # https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake-update.html
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-23.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs-stable, nixpkgs-unstable, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        stable-pkgs = nixpkgs-stable.legacyPackages.${system};
-        unstable-pkgs = nixpkgs-unstable.legacyPackages.${system};
+        pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        devShells.default = with unstable-pkgs;
+        devShells.default = with pkgs;
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
-              stable-pkgs.bashInteractive
+              bashInteractive
 
               # Maintain this repo
               nil
@@ -37,9 +35,9 @@
             '';
           };
 
-        packages.lila = stable-pkgs.mkShell
+        packages.lila = pkgs.mkShell
           {
-            buildInputs = with stable-pkgs; [
+            buildInputs = with pkgs; [
               bashInteractive
 
               sbt
