@@ -8,13 +8,21 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        devShells.default = with pkgs;
+        formatter = pkgs.nixfmt-rfc-style;
+        devShells.default =
+          with pkgs;
           mkShell {
             buildInputs = [
               # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
@@ -22,7 +30,7 @@
 
               # Maintain this repo
               nil
-              nixpkgs-fmt
+              nixfmt-rfc-style
               dprint
               typos
               go-task
@@ -35,20 +43,19 @@
             '';
           };
 
-        packages.lila = pkgs.mkShell
-          {
-            buildInputs = with pkgs; [
-              bashInteractive
+        packages.lila = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            bashInteractive
 
-              sbt
-              nodejs-18_x
-              yarn
-            ];
+            sbt
+            nodejs-18_x
+            yarn
+          ];
 
-            shellHook = ''
-              echo 'Dev shell for "lila"'
-            '';
-          };
+          shellHook = ''
+            echo 'Dev shell for "lila"'
+          '';
+        };
       }
     );
 }
