@@ -50,7 +50,7 @@
 
             sbt
             nodejs-18_x
-            yarn
+            nodejs-18_x.pkgs.yarn
           ];
 
           shellHook = ''
