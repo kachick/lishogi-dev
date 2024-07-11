@@ -36,6 +36,7 @@
               go-task
               shellcheck
               shfmt
+              hostname
             ];
 
             shellHook = ''
