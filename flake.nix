@@ -1,6 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # nodejs-18_x is deprecated since nixos-25.05
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
   };
 
   outputs =
@@ -38,26 +39,21 @@
               ]
             );
           };
-        }
-      );
-      packages.lila = forAllSystems (
-        system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-        in
-        pkgs.mkShell {
-          buildInputs = with pkgs; [
-            bashInteractive
 
-            sbt
-            nodejs-18_x
-            nodejs-18_x.pkgs.yarn
-            python3
-          ];
+          lila = pkgs.mkShell {
+            buildInputs = with pkgs; [
+              bashInteractive
 
-          shellHook = ''
-            echo 'Dev shell for "lila"'
-          '';
+              sbt
+              nodejs-18_x
+              nodejs-18_x.pkgs.yarn
+              python3
+            ];
+
+            shellHook = ''
+              echo 'Dev shell for "lila"'
+            '';
+          };
         }
       );
     };
