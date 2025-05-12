@@ -14,7 +14,7 @@
       forAllSystems = lib.genAttrs lib.systems.flakeExposed;
     in
     {
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree); # nixfmt-tree is available since nixos-25.05
       devShells = forAllSystems (
         system:
         let
