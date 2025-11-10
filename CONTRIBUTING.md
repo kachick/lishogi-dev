@@ -2,7 +2,7 @@
 
 ## Setup
 
-1. Install [Nix](https://nixos.org/) package manager, with [this](https://github.com/DeterminateSystems/nix-installer) or enabling [Flakes](https://nixos.wiki/wiki/Flakes) by yourself
+1. Install [Nix package manager](https://nixos.org/download/) and enable [Flakes](https://nixos.wiki/wiki/Flakes)
 1. Install [direnv](https://github.com/direnv/direnv)
 1. Clone this repository and `direnv allow` in the directory
 1. You can use development tools

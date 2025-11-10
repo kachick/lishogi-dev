@@ -6,7 +6,7 @@ Set up environments to run [lishogi.org](https://lishogi.org/) and [develop](htt
 
 ## Usage
 
-Install [Nix](https://github.com/DeterminateSystems/nix-installer), [Docker](https://www.docker.com/) and [direnv](https://github.com/direnv/direnv)
+Install [Nix package manager](https://nixos.org/download/), [Docker](https://www.docker.com/) and [direnv](https://github.com/direnv/direnv)
 
 ```bash
 git clone git@github.com:kachick/lishogi-dev.git
