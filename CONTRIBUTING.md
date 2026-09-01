@@ -12,13 +12,13 @@
 ...
 ```
 
-## Trouble shooting in docker container
+## Trouble shooting in podman container
 
 nixos container basically does not have basic unix tools, but installing them is easy as follows
 
 ```bash
-docker compose up -d
-docker compose exec shoginet bash
+podman compose up -d
+podman compose exec shoginet bash
 cat /etc/hosts
 nix-shell --packages iputils netcat httpie
 ping lila

@@ -13,7 +13,7 @@ git clone git@github.com:kachick/lishogi-dev.git
 cd lishogi-dev
 direnv allow
 task setup
-docker compose up --detach # MongoDB, Redis, lila-ws(websocket), shoginet(engine)
+podman compose up --detach # MongoDB, Redis, lila-ws(websocket), shoginet(engine)
 # You can check the back-end logs via `docker compose logs [service-name]`
 task prepare_db
 ```
@@ -39,7 +39,7 @@ If you want to stop the services
 ```console
 [lila] $ exit
 cd ../../
-$ docker compose down
+$ podman compose down
 ...
 ```
 

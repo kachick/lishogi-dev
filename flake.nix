@@ -33,7 +33,7 @@
                 shellcheck
                 shfmt
                 hostname
-                docker
+                podman
               ]
             );
           };
