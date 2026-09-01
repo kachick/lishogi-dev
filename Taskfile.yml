@@ -24,8 +24,7 @@ tasks:
     cmds:
       - dprint check
       - typos . .github .vscode
-      # nix fmt doesn't have check: https://github.com/NixOS/nix/issues/6918
-      - git ls-files '*.nix' | xargs nixfmt --check
+      - treefmt
       - shellcheck ./scripts/*.bash
   setup:
     cmds:
