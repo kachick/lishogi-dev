@@ -1,7 +1,6 @@
 {
   inputs = {
-    # nodejs-18_x is deprecated since nixos-25.05
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
   };
 
   outputs =
@@ -14,7 +13,7 @@
       forAllSystems = lib.genAttrs lib.systems.flakeExposed;
     in
     {
-      # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree); # nixfmt-tree is available since nixos-25.05
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
       devShells = forAllSystems (
         system:
         let
@@ -27,9 +26,7 @@
               [
                 # https://github.com/NixOS/nix/issues/730#issuecomment-162323824
                 bashInteractive
-                # Maintain this repo
-                nil
-                nixfmt-rfc-style
+                nixd
                 dprint
                 typos
                 go-task
@@ -45,8 +42,8 @@
               bashInteractive
 
               sbt
-              nodejs-18_x
-              nodejs-18_x.pkgs.yarn
+              nodejs
+              nodejs.pkgs.yarn
               python3
             ];
 
