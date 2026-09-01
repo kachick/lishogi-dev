@@ -1,0 +1,12 @@
+{
+  "workers": 1,
+  "engines": {
+    "yaneuraou": {
+      "path": "YaneuraOu"
+    },
+    "fairy": {
+      "path": "./engines/fairy-stockfish"
+    }
+  },
+  "endpoint": "http://lila:9663"
+}

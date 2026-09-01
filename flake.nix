@@ -42,9 +42,10 @@
               bashInteractive
 
               sbt
+              temurin-bin-21
               nodejs
-              nodejs.pkgs.yarn
-              python3
+              pnpm_10
+              yaneuraou
             ];
 
             shellHook = ''

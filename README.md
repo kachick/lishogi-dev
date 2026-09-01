@@ -18,18 +18,12 @@ docker compose up --detach # MongoDB, Redis, lila-ws(websocket), shoginet(engine
 task prepare_db
 ```
 
-Replace shebang in `./repos/lishogi/ui/build` if you working on NixOS
-
-```diff
--#!/bin/bash -ea
-+#!/usr/bin/env -S bash -ea
-```
-
 ```bash
 cd repos/lishogi
-nix develop ../#lila # Enter in Nix dev shell, with nodejs, sbt
-./ui/build
-./lila # Enter in sbt console
+nix develop ../#lila # Enter in Nix dev shell, with nodejs, pnpm, sbt
+pnpm install
+pnpm ui:build
+./lila.sh # Enter in sbt console
 ```
 
 ```console

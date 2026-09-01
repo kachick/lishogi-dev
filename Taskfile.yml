@@ -39,7 +39,7 @@ tasks:
   deps:
     cmds:
       - nix --version
-      - nil --version
+      - nixd --version
       - task --version
       - dprint --version
       - typos --version

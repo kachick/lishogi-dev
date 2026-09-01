@@ -4,23 +4,23 @@ WORKDIR /product
 
 RUN nix-channel --update
 
-RUN nix-env -iA nixpkgs.gcc nixpkgs.gnumake
-COPY ["./repos/shoginet/build-yaneuraou.sh", "./repos/shoginet/build-fairy.sh", "./"]
-RUN ./build-yaneuraou.sh && ./build-fairy.sh
+RUN nix-env -iA nixpkgs.gcc nixpkgs.gnumake nixpkgs.git
+COPY ["./repos/shoginet/scripts/fairy.sh", "./"]
+RUN mkdir -p engines && ./fairy.sh
 
 FROM nixos/nix:2.20.2 AS runner
 
-COPY ./repos/shoginet/ /shoginet/
-COPY ./conf/shoginet.ini /shoginet
-COPY --from=builder /product /product
+WORKDIR /shoginet
 
 RUN nix-channel --update
 
-RUN nix-env -iA nixpkgs.python3 nixpkgs.python3Packages.requests
+RUN nix-env -iA nixpkgs.nodejs_22 nixpkgs.yaneuraou
 
-WORKDIR /shoginet
+COPY ./repos/shoginet/ /shoginet/
+COPY ./conf/shoginet.json /shoginet/config/local.json
+COPY --from=builder /product/engines/fairy-stockfish /shoginet/engines/fairy-stockfish
 
-RUN cp -rf ./eval /product/eval/
+RUN npm ci || npm install
 
-ENTRYPOINT nix-shell --packages python3Packages.requests --run "python3 shoginet.py"
+ENTRYPOINT ["npm", "run", "start"]
 
