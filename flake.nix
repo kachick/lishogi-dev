@@ -33,6 +33,7 @@
                 shellcheck
                 shfmt
                 hostname
+                docker
               ]
             );
           };
