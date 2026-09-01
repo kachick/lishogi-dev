@@ -32,6 +32,9 @@ tasks:
   pin:
     cmds:
       - ./scripts/pin_repos.bash
+  patch_node_binaries:
+    cmds:
+      - ./scripts/patch_node_binaries.bash
   prepare_db:
     cmds:
       - podman compose exec mongodb bash -c 'mongosh lishogi < /lishogi-db-scripts/utils/indexes.js'

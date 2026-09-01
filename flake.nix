@@ -34,6 +34,7 @@
                 shfmt
                 hostname
                 podman
+                nixfmt-tree
               ]
             );
           };
@@ -47,6 +48,7 @@
               nodejs
               pnpm_10
               yaneuraou
+              patchelf
             ];
 
             shellHook = ''

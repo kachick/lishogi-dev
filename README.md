@@ -22,6 +22,7 @@ task prepare_db
 cd repos/lishogi
 nix develop ../#lila # Enter in Nix dev shell, with nodejs, pnpm, sbt
 pnpm install
+task -d ../.. patch_node_binaries # Needed on NixOS to patch prebuilt binaries (sass-embedded, biome)
 pnpm ui:build
 ./lila.sh # Enter in sbt console
 ```
