@@ -2,42 +2,89 @@
 
 version: '3'
 
+# Style guide:
+# - Limit tasks to a single command unless sequence execution is required
+# - Define commands as separate tasks and combine them using deps
+# - If a command takes more than a screenful of arguments, write a script file instead
+
 tasks:
   default:
     deps:
       - task: fmt
       - task: lint
       - task: test
+
   check:
     deps:
       - task: test
       - task: lint
+
   test:
     cmds:
       - nix flake check
+
   fmt:
+    deps:
+      - task: fmt-nix
+      - task: fmt-dprint
+      - task: fmt-sh
+      - task: fmt-typos
+
+  fmt-nix:
+    cmds:
+      - git ls-files '*.nix' | xargs nix fmt
+
+  fmt-dprint:
     cmds:
       - dprint fmt
-      - git ls-files '*.nix' | xargs nix fmt
+
+  fmt-sh:
+    cmds:
       - shfmt --write ./scripts/*.bash
+
+  fmt-typos:
+    cmds:
+      - typos --write-changes
+
   lint:
+    deps:
+      - task: lint-dprint
+      - task: lint-typos
+      - task: lint-treefmt
+      - task: lint-sh
+
+  lint-dprint:
     cmds:
       - dprint check
-      - typos . .github .vscode
+
+  lint-typos:
+    cmds:
+      - typos
+
+  lint-treefmt:
+    cmds:
       - treefmt
+
+  lint-sh:
+    cmds:
       - shellcheck ./scripts/*.bash
+
   setup:
     cmds:
       - ./scripts/setup.bash
+
   pin:
     cmds:
       - ./scripts/pin_repos.bash
+
   patch_node_binaries:
     cmds:
       - ./scripts/patch_node_binaries.bash
+
   prepare_db:
     cmds:
       - podman compose exec mongodb bash -c 'mongosh lishogi < /lishogi-db-scripts/utils/indexes.js'
+
   deps:
     cmds:
       - nix --version
